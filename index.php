@@ -76,8 +76,22 @@
 		</div>
 
 	</div>
-
 	<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php
+	require ('connect_oo.php'); #connect to database
+
+	#values initialised
+    $firstName = "";
+    $lastName = "";
+    $email = "";
+    $address = "";
+    $postcode = "";
+    $telephone = "";
+    $weddingDate = "";
+ 	$specialRequirements = "";
+?>
+
