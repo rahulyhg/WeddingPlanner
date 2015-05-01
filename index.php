@@ -7,99 +7,67 @@
 <body>
 	<h1 class="text-center">Wedding Planner Service</h1>
 	<div class="container">
-	<div class="row">
-		<div class="col-md-8">
-		<!-- Carousel of images -->
-		<div id="weddingPicsCarousel" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#weddingImage1" data-slide-to="0" class="active"></li>
-				<li data-target="#weddingImage2" data-slide-to="1"></li>
-				<li data-target="#weddingImage4" data-slide-to="2"></li>
-			</ol>
+		<div class="row">
+			<div class="col-md-8">
+				<!-- Carousel of images -->
+				<div id="weddingPicsCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#weddingImage1" data-slide-to="0" class="active"></li>
+						<li data-target="#weddingImage2" data-slide-to="1"></li>
+					</ol>
 
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<img class="img-responsive" src="img/weddingImage1.jpg" alt="Generic Wedding Image">
-					<div class="carousel-caption">Plannign Weddings is tough!</div>
-				</div>
-				<div class="item">
-					<img class="img-responsive" src="img/weddingImage2.jpg" alt="Generic Wedding Image">
-					<div class="carousel-caption">...</div>
-				</div>
-				<div class="item">
-					<img class="img-responsive" src="img/weddingImage3.jpg" alt="Generic Wedding Image">
-					<div class="carousel-caption">...</div>
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img class="carousel-image" src="img/weddingImage1.jpg" alt="Generic Wedding Image">
+							<div class="carousel-caption">Planning Weddings is tough!</div>
+						</div>
+						<div class="item">
+							<img class="carousel-image" src="img/weddingImage2.jpg" alt="Generic Wedding Image">
+							<div class="carousel-caption">...</div>
+						</div>
+					</div>
+
+					<!-- Controls -->
+					<a class="left carousel-control" href="#weddingPicsCarousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#weddingPicsCarousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
 				</div>
 			</div>
 
-			<!-- Controls -->
-			<a class="left carousel-control" href="#weddingPicsCarousel" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="right carousel-control" href="#weddingPicsCarousel" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-		</div>
-
-		<!-- Quote form -->
-		<div class="col-md-4">
-			<h3 class="text-center">Get a Quote</h3>
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label for="firstName" class="col-sm-2 control-label">First Name</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="" id="firstName"></div>
-				</div>
-				<div class="form-group">
-					<label for="lastName" class="col-sm-2 control-label">Last Name</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="" id="lastName"></div>
-				</div>
-				<div class="form-group">
-					<label for="email" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-10">
-						<input type="email" class="form-control" placeholder="" id="email"></div>
-				</div>
-				<div class="form-group">
-					<label for="address" class="col-sm-2 control-label">Address</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" class="form-control" placeholder="" id="address"></div>
-				</div>
-				<div class="form-group">
-					<label for="postCode" class="col-sm-2 control-label">Postcode</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="" id="postCode"></div>
-				</div>
-				<div class="form-group">
-					<label for="telephone" class="col-sm-2 control-label">Telephone</label>
-					<div class="col-sm-10">
-						<input type="tel" class="form-control" placeholder="" id="telephone"></div>
-				</div>
-				<div class="form-group">
-					<label for="weddingDate" class="col-sm-2 control-label">Wedding Date</label>
-					<div class="col-sm-10">
-						<input type="date" class="form-control" placeholder="" id="weddingDate"></div>
-				</div>
-				<div class="form-group">
-					<label for="weddingLocation" class="col-sm-2 control-label">Wedding Location</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="" id="weddingLocation"></div>
-				</div>
-				<div class="form-group">
-					<label for="specialRequirements" class="col-sm-2 control-label">Special requirements</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="" id="specialRequirements"></div>
-				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
-				</div>
-			</form>
-		</div>
+			<!-- Quote form -->
+			<div class="col-md-4">
+				<h3 class="text-center">Get a Quote</h3>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="First Name" id="firstName"></div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Last Name" id="lastName"></div>
+					<div class="form-group">
+						<input type="email" class="form-control" placeholder="Email" id="email"></div>
+					<div class="form-group">
+						<input type="text" class="form-control"placeholder="Address" id="address"></div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Postcode" id="postCode"></div>
+					<div class="form-group">
+						<input type="tel" class="form-control" placeholder="Telephone" id="telephone"></div>
+					<div class="form-group">
+						<input type="date" class="form-control" placeholder="Wedding Date" id="weddingDate"></div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Wedding Location" id="weddingLocation"></div>
+					<div class="form-group">
+						<textarea type="text" class="form-control" placeholder="Special Requirements" id="specialRequirements"></textarea></div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
