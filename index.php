@@ -8,52 +8,52 @@
 	<div class="container">
 		<form class="form-horizontal">
 			<div class="form-group">
-				<label for="firstName">First Name</label>
-				<div>
-					<input type="text" placeholder="" id="firstName"></div>
+				<label for="firstName" class="col-sm-2 control-label">First Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="" id="firstName"></div>
 			</div>
 			<div class="form-group">
-				<label for="lastName">Last Name</label>
-				<div>
-					<input type="text" placeholder="" id="lastName"></div>
+				<label for="lastName" class="col-sm-2 control-label">Last Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="" id="lastName"></div>
 			</div>
 			<div class="form-group">
-				<label for="email">Email</label>
-				<div>
-					<input type="email" placeholder="" id="email"></div>
+				<label for="email" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" placeholder="" id="email"></div>
 			</div>
 			<div class="form-group">
-				<label for="address">Address</label>
-				<div>
-					<input type="text" placeholder="" id="address"></div>
+				<label for="address" class="col-sm-2 control-label">Address</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" class="form-control" placeholder="" id="address"></div>
 			</div>
 			<div class="form-group">
-				<label for="postCode">Postcode</label>
-				<div>
-					<input type="text" placeholder="" id="postCode"></div>
+				<label for="postCode" class="col-sm-2 control-label">Postcode</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="" id="postCode"></div>
 			</div>
 			<div class="form-group">
-				<label for="telephone">Telephone</label>
-				<div>
-					<input type="tel" placeholder="" id="telephone"></div>
+				<label for="telephone" class="col-sm-2 control-label">Telephone</label>
+				<div class="col-sm-10">
+					<input type="tel" class="form-control" placeholder="" id="telephone"></div>
 			</div>
 			<div class="form-group">
-				<label for="weddingDate">Wedding Date</label>
-				<div>
-					<input type="date" placeholder="" id="weddingDate"></div>
+				<label for="weddingDate" class="col-sm-2 control-label">Wedding Date</label>
+				<div class="col-sm-10">
+					<input type="date" class="form-control" placeholder="" id="weddingDate"></div>
 			</div>
 			<div class="form-group">
-				<label for="weddingLocation">Wedding Location</label>
-				<div>
-					<input type="text" placeholder="" id="weddingLocation"></div>
+				<label for="weddingLocation" class="col-sm-2 control-label">Wedding Location</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="" id="weddingLocation"></div>
 			</div>
 			<div class="form-group">
-				<label for="specialRequirements">Special requirements</label>
-				<div>
-					<input type="text" placeholder="" id="specialRequirements"></div>
+				<label for="specialRequirements" class="col-sm-2 control-label">Special requirements</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="" id="specialRequirements"></div>
 			</div>
 			<div class="form-group">
-				<button class="btn btn-default">Submit enquiry</button>
+				<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
 			</div>
 		</form>
 	</div>
