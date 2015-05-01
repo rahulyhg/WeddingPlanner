@@ -7,42 +7,46 @@
 <body>
 	<h1 class="text-center">Wedding Planner Service</h1>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<!-- Carousel of images -->
-				<div id="weddingPicsCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#weddingImage1" data-slide-to="0" class="active"></li>
-						<li data-target="#weddingImage2" data-slide-to="1"></li>
-					</ol>
+		<!-- Carousel of images -->
+		<div id="weddingPicsCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#weddingPicsCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#weddingPicsCarousel" data-slide-to="1"></li>
+				<li data-target="#weddingPicsCarousel" data-slide-to="2"></li>
+			</ol>
 
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<img class="carousel-image" src="img/weddingImage1.jpg" alt="Generic Wedding Image">
-							<div class="carousel-caption">Planning Weddings is tough!</div>
-						</div>
-						<div class="item">
-							<img class="carousel-image" src="img/weddingImage2.jpg" alt="Generic Wedding Image">
-							<div class="carousel-caption">...</div>
-						</div>
-					</div>
-
-					<!-- Controls -->
-					<a class="left carousel-control" href="#weddingPicsCarousel" role="button" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<a class="right carousel-control" href="#weddingPicsCarousel" role="button" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img  class="carousel-image" src="img/weddingImage1.jpg" alt="Generic Wedding Image 1">
+					<div class="carousel-caption">Planning Weddings is tough!</div>
+				</div>
+				<div class="item">
+					<img class="carousel-image" src="img/weddingImage2.jpg" alt="Generic Wedding Image 2">
+					<div class="carousel-caption">...</div>
+				</div>
+				<div class="item">
+					<img class="carousel-image" src="img/weddingImage3.jpg" alt="Generic Wedding Image 3">
+					<div class="carousel-caption">...</div>
 				</div>
 			</div>
 
+			<!-- Controls -->
+			<a class="left carousel-control" href="#weddingPicsCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#weddingPicsCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6"></div>
 			<!-- Quote form -->
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<h3 class="text-center">Get a Quote</h3>
 				<form class="form-horizontal">
 					<div class="form-group">
@@ -62,13 +66,15 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Wedding Location" id="weddingLocation"></div>
 					<div class="form-group">
-						<textarea type="text" class="form-control" placeholder="Special Requirements" id="specialRequirements"></textarea></div>
+						<textarea type="text" class="form-control" placeholder="Special Requirements" id="specialRequirements"></textarea>
+					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
 					</div>
 				</form>
 			</div>
 		</div>
+
 	</div>
 
 	<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
