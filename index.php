@@ -50,23 +50,23 @@
 				<h3 class="text-center">Get a Quote</h3>
 				<form class="form-horizontal">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="First Name" id="firstName"></div>
+						<input type="text" class="form-control" placeholder="First Name" name="firstName"></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Last Name" id="lastName"></div>
+						<input type="text" class="form-control" placeholder="Last Name" name="lastName"></div>
 					<div class="form-group">
-						<input type="email" class="form-control" placeholder="Email" id="email"></div>
+						<input type="email" class="form-control" placeholder="Email" name="email"></div>
 					<div class="form-group">
-						<input type="text" class="form-control"placeholder="Address" id="address"></div>
+						<input type="text" class="form-control"placeholder="Address" name="address"></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Postcode" id="postCode"></div>
+						<input type="text" class="form-control" placeholder="Postcode" name="postcode"></div>
 					<div class="form-group">
-						<input type="tel" class="form-control" placeholder="Telephone" id="telephone"></div>
+						<input type="tel" class="form-control" placeholder="Telephone" name="telephone"></div>
 					<div class="form-group">
-						<input type="date" class="form-control" placeholder="Wedding Date" id="weddingDate"></div>
+						<input type="date" class="form-control" placeholder="Wedding Date" name="weddingDate"></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Wedding Location" id="weddingLocation"></div>
+						<input type="text" class="form-control" placeholder="Wedding Location" name="weddingLocation"></div>
 					<div class="form-group">
-						<textarea type="text" class="form-control" placeholder="Special Requirements" id="specialRequirements"></textarea>
+						<textarea type="text" class="form-control" placeholder="Special Requirements" name="specialRequirements"></textarea>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
@@ -85,6 +85,7 @@
 	require ('connect_oo.php'); #connect to database
 
 	#values initialised
+	$today = date("Y-m-d H:i:s");    
     $firstName = "";
     $lastName = "";
     $email = "";
@@ -92,6 +93,31 @@
     $postcode = "";
     $telephone = "";
     $weddingDate = "";
+    $weddingLocation
  	$specialRequirements = "";
+
+
+ 	$firstName = $mysqli->real_escape_string($_POST['firstName']);
+ 	$lastName = $mysqli->real_escape_string($_POST['lastName']);
+ 	$email = $mysqli->real_escape_string($_POST['email']);
+ 	$address = $mysqli->real_escape_string($_POST['address']);
+ 	$postcode = $mysqli->real_escape_string($_POST['postcode']);
+ 	$telephone = $mysqli->real_escape_string($_POST['telephone']);
+ 	$weddingDate = $mysqli->real_escape_string($_POST['weddingDate']);
+ 	$weddingLocation = $mysqli->real_escape_string($_POST['weddingLocation']);
+ 	$specialRequirements = $mysqli->real_escape_string($_POST['specialRequirements']);
+
+ 	#query
+        $stmt = $mysqli->prepare("INSERT INTO inquiries(submit_date, first_name,last_name,address,postcode,email,wedding_date,wedding_location,special_req) VALUES (?,?,?,?,?,?,?,?,?);");
+        $stmt->bind_param('sssssssss', $today,$firstName, $lastName, $addres, $postcode, $email,$weddingDate,$weddingLocation,$specialRequirements);
+        $OK = $stmt->execute();
+        #if query has been executed
+        if ($OK)
+            echo "<p>Student has been enrolled</p>";
+        else
+            echo "<p> Something went wrong :(</p>";
+
+        $stmt->close();
+        $mysqli->close();
 ?>
 
