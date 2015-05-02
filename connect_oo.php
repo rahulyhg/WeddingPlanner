@@ -1,5 +1,5 @@
 <?php 
-$mysqli = new mysqli("linuxproj.ecs.soton.ac.uk","mak1g11","incorrect","db_mak1g11"); 
+$mysqli = new mysqli("localhost","root","incorrect","mgmt_webapp_msc"); 
  
 if (mysqli_connect_errno()) { 
     printf("Connect failed: %s\n", mysqli_connect_error()); 
