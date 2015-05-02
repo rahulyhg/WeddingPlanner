@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 	$("input")
 		.on("invalid",function(){
-			setValidity(this);
+			
 			setIncorrectInputs(this);
 		})
 		.on("valid",function(){
@@ -20,7 +20,7 @@ $(document).ready(function(){
 	$(".typeMismatch")
 		.on("keyup",function(){
 		if(this.validity.typeMismatch || $(this).val() < 1){
-			this.setCustomValidity("Please enter a valid first name");
+			setValidity(this);
 			setIncorrectInputs(this);
 		}else{
 			setCorrectInputs(this);
@@ -31,7 +31,7 @@ $(document).ready(function(){
 	$(".patternMismatch")
 		.on("keyup",function(){
 		if(this.validity.patternMismatch){
-			this.setCustomValidity("Please enter a valid first name");
+			setValidity(this);
 			setIncorrectInputs(this);
 		}else{
 			setCorrectInputs(this);
