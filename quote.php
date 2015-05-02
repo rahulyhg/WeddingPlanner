@@ -15,7 +15,7 @@
     $specialRequirements = $mysqli->real_escape_string($_POST['special-requirements']);
 
 
-    echo "<ul>"
+    echo "<ul>";
     #validate first name
     if(empty ($firstName) || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$firstName)){
         echo "<li>Please enter a valid first name</li>";
@@ -44,12 +44,12 @@
     }
     
     #validate postcode
-    if(!empty($postcode) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$poscode)){
-        echo "<li>Please enter a valid address</li>";   
+    if(!empty($postcode) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$postcode)){
+        echo "<li>Please enter a valid UK postcode</li>";   
     }
 
     #validate wedding date
-    if(empty ($weddingDate) || !checkDate($weddingDate) || $weddingDate < $today){
+    if(empty ($weddingDate) || !checkValidDate($weddingDate) || $weddingDate < $today){
         echo "<li>Please enter a valid date in the future</li>";
     }
 
@@ -58,7 +58,7 @@
         echo "<li>Please enter a valid wedding location</li>";
     }
     
-    echo "</ul>"
+    echo "</ul>";
 
     #query
     if($stmt = $mysqli->prepare("INSERT INTO inquiries(submit_date, first_name, last_name, address, postcode, email, phone, wedding_date, wedding_location, special_req) VALUES (?,?,?,?,?,?,?,?,?,?);")){
@@ -83,7 +83,7 @@
     }
 
     #returns boolean depending on validity of date
-    function checkDate( $postedDate) {
+    function checkValidDate( $postedDate) {
         if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$postedDate) ) {
         list( $year , $month , $day ) = explode('-',$postedDate);
         return( checkdate( $month , $day , $year ) );
