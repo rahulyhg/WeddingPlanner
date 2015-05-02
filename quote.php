@@ -4,17 +4,15 @@
     #values initialised
     $today = date("Y-m-d H:i:s");    
     
-    $firstName = $mysqli->real_escape_string($_POST['firstName']);
-    $lastName = $mysqli->real_escape_string($_POST['lastName']);
+    $firstName = $mysqli->real_escape_string($_POST['first-name']);
+    $lastName = $mysqli->real_escape_string($_POST['last-name']);
     $email = $mysqli->real_escape_string($_POST['email']);
     $address = $mysqli->real_escape_string($_POST['address']);
     $postcode = $mysqli->real_escape_string($_POST['postcode']);
-    $telephone = $mysqli->real_escape_string($_POST['telephone']);
-    $weddingDate = $mysqli->real_escape_string($_POST['weddingDate']);
-    $weddingLocation = $mysqli->real_escape_string($_POST['weddingLocation']);
-    $specialRequirements = $mysqli->real_escape_string($_POST['specialRequirements']);
-    $status = "current";
-    $gender = "M";
+    $telephone = $mysqli->real_escape_string($_POST['telephone-number']);
+    $weddingDate = $mysqli->real_escape_string($_POST['wedding-date']);
+    $weddingLocation = $mysqli->real_escape_string($_POST['wedding-location']);
+    $specialRequirements = $mysqli->real_escape_string($_POST['special-requirements']);
 
     echo "
 <ul>
