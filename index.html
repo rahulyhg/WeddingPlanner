@@ -85,11 +85,9 @@
 				<h3 class="text-center">Get a Quote</h3>
 				<form method="post" action="quote.php" name="quote" class="form-horizontal">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" maxlength="35" pattern="[a-zA-Z ,.'-]+"
-    oninvalid="setCustomValidity('Please enter a valid first name')"  onchange="try{setCustomValidity('')}catch(e){}" required></div>
+						<input type="text" class="form-control patternMismatching" placeholder="First Name" id="firstName" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" maxlength="35"  pattern="[a-zA-Z ,.'-]+"
-    oninvalid="setCustomValidity('Please enter a valid last name')"  onchange="try{setCustomValidity('')}catch(e){}" required></div>
+						<input type="text" class="form-control patternMismatching" placeholder="Last Name" id="lastName" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
 					<div class="form-group">
 						<input type="email" class="form-control" placeholder="Email" id="email" name="email" maxlength="254" required></div>
 					<div class="form-group">
@@ -97,12 +95,11 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Postcode" id="postcode" name="postcode" maxlength="8"></div>
 					<div class="form-group">
-						<input type="tel" class="form-control" placeholder="Telephone" id="telephone" name="telephone" maxlength="11" pattern="[0-9]{11}"
-    oninvalid="setCustomValidity('Please enter a valid telephone number')"  onchange="try{setCustomValidity('')}catch(e){}"></div>
+						<input type="tel" class="form-control patternMismatching" placeholder="Telephone" id="telephone" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
 					<div class="form-group">
-						<input type="date" class="form-control" placeholder="Wedding Date" id="weddingDate" name="weddingDate" min="2015-05-01" required></div>
+						<input type="date" class="form-control" placeholder="Wedding Date" id="weddingDate" name="wedding-date" min="2015-05-01" required></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Wedding Location" id="weddingLocation" name="weddingLocation" maxlength="50"  oninvalid="setCustomValidity('Please enter a wedding location')"  onchange="try{setCustomValidity('')}catch(e){}"  required></div>
+						<input type="text" class="form-control" placeholder="Wedding Location" id="weddingLocation" name="wedding-location" maxlength="50"  oninvalid="setCustomValidity('Please enter a wedding location')"  onchange="try{setCustomValidity('')}catch(e){}"  required></div>
 					<div class="form-group">
 						<textarea type="text" class="form-control" placeholder="Special Requirements" id="specialRequirements" name="specialRequirements"></textarea>
 					</div>
