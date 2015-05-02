@@ -45,8 +45,15 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".dateMismatch")
-		.on("")
+	$(".requiredMismatch")
+		.on("keyup",function(){
+			if($(this).val() < 1){
+			setValidity(this);
+			setIncorrectInputs(this);
+		}else{
+			setCorrectInputs(this);
+		}
+		});
 
 });
 
