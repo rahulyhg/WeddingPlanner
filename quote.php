@@ -17,14 +17,14 @@
 
     echo "<ul>"
     #validate first name
-    if(empty ($firstName) || strlen($firstName) > 35){
+    if(empty ($firstName) || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$firstName)){
         echo "<li>Please enter a valid first name</li>";
     }else{
 
     }
 
     #validate last name
-    if(empty ($lastName || strlen($firstName) > 35)){
+    if(empty ($lastName || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$lastName))){
         echo "<li>Please enter a valid last name</li>";
     }
 
@@ -48,22 +48,13 @@
         echo "<li>Please enter a valid address</li>";   
     }
 
-
     #validate wedding date
-    if(empty ($weddingDate)){
+    if(empty ($weddingDate) || !checkDate($weddingDate) || $weddingDate < $today){
         echo "<li>Please enter a valid date in the future</li>";
-    }else if(!checkDate($weddingDate)){
-        echo "<li>Please enter a valid date in the future</li>";
-    }else if($weddingDate < $today){
-        echo "<li>Please enter a valid date in the future</li>";        
     }
 
-
-    #validate telephone
-
-
     #validate wedding location
-    if(empty ($weddingLocation)){
+    if(empty ($weddingLocation) || strlen($firstName) > 50){
         echo "<li>Please enter a valid wedding location</li>";
     }
     
