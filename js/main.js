@@ -7,22 +7,36 @@ $(document).ready(function(){
 	var telephone = document.getElementById("telephone");
 	
 
-	$("#first-name")
+	$("input")
 		.on("invalid",function(){
-			console.log(this);
-			this.setCustomValidity("Please enter a valid first name");
+			setValidity(this);
 			setIncorrectInputs(this);
 		})
+		.on("valid",function(){
+			setCorrectInputs(this);
+		});
+
+
+	$(".typeMismatch")
 		.on("keyup",function(){
-		if(this.validity.patternMismatch || $(this).val().length < 1){
+		if(this.validity.typeMismatch || $(this).val() < 1){
 			this.setCustomValidity("Please enter a valid first name");
-			this.setIncorrectInputs(this);
+			setIncorrectInputs(this);
 		}else{
 			setCorrectInputs(this);
 		}
 	});
 
 
+	$(".patternMismatch")
+		.on("keyup",function(){
+		if(this.validity.patternMismatch){
+			this.setCustomValidity("Please enter a valid first name");
+			setIncorrectInputs(this);
+		}else{
+			setCorrectInputs(this);
+		}
+	});
 
 });
 
@@ -40,4 +54,13 @@ var setCorrectInputs = function(element){
 	$(element).parent().removeClass("has-error has-feedback");
 	$(element).parent().addClass("has-success has-feedback");
 	$(element).parent().append("<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>");
+};
+
+var setValidity = function(element){
+	var values = element.id.split("-");
+	var fieldname = "";
+	for(var i=0;i < values.length;i++){
+		fieldname+= " "+  values[i];
+	}
+	element.setCustomValidity("Please enter a valid" + fieldname + ".");
 };
