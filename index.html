@@ -93,7 +93,7 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Address" id="address" name="address" maxlength="255"></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Postcode" id="postcode" name="postcode" maxlength="8"></div>
+						<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="postcode" name="postcode" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8"></div>
 					<div class="form-group">
 						<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
 					<div class="form-group">
