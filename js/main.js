@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var telephone = document.getElementById("telephone");
 	
 
-	$("#firstName")
+	$("#first-name")
 		.on("invalid",function(){
 			console.log(this);
 			this.setCustomValidity("Please enter a valid first name");
@@ -22,7 +22,7 @@ $(document).ready(function(){
 		}
 	});
 
-	
+
 
 });
 
