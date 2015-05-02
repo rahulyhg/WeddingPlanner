@@ -1,11 +1,10 @@
 <?php 
 $mysqli = new mysqli("localhost","root","incorrect","mgmt_webapp_msc"); 
- 
+$sqlError=false;
 if (mysqli_connect_errno()) { 
-    printf("Connect failed: %s\n", mysqli_connect_error()); 
+    $sqlError=true;
     exit(); 
-}else{
-	printf("connected successfully!");
-} 
+}
+
 $mysqli->set_charset("utf-8"); 
 ?> 
