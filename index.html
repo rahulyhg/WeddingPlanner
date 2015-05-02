@@ -87,21 +87,30 @@
 				<h3 class="text-center">Get a Quote</h3>
 				<form method="post" action="quote.php" name="quote" class="form-horizontal">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="First Name" name="firstName"></div>
+						<input type="text" class="form-control" placeholder="First Name" name="firstName" maxlength="35">
+					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Last Name" name="lastName"></div>
+						<input type="text" class="form-control" placeholder="Last Name" name="lastName" maxlength="35">
+					</div>
 					<div class="form-group">
-						<input type="email" class="form-control" placeholder="Email" name="email"></div>
+						<input type="email" class="form-control" placeholder="Email" name="email" maxlength="254">
+
+					</div>
 					<div class="form-group">
-						<input type="text" class="form-control"placeholder="Address" name="address"></div>
+						<input type="text" class="form-control"placeholder="Address" name="address" maxlength="255">
+					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Postcode" name="postcode"></div>
+						<input type="text" class="form-control" placeholder="Postcode" name="postcode" maxlength="8">
+					</div>
 					<div class="form-group">
-						<input type="tel" class="form-control" placeholder="Telephone" name="telephone"></div>
+						<input type="tel" class="form-control" placeholder="Telephone" name="telephone" maxlength="11">
+					</div>
 					<div class="form-group">
-						<input type="date" class="form-control" placeholder="Wedding Date" name="weddingDate"></div>
+						<input type="date" class="form-control" placeholder="Wedding Date" name="weddingDate">
+					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Wedding Location" name="weddingLocation"></div>
+						<input type="text" class="form-control" placeholder="Wedding Location" name="weddingLocation" maxlength="50">
+					</div>
 					<div class="form-group">
 						<textarea type="text" class="form-control" placeholder="Special Requirements" name="specialRequirements"></textarea>
 					</div>
