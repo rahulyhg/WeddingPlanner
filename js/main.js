@@ -9,11 +9,8 @@ $(document).ready(function(){
 
 	$("input")
 		.on("invalid",function(){
-			
+			setValidity(this);
 			setIncorrectInputs(this);
-		})
-		.on("valid",function(){
-			setCorrectInputs(this);
 		});
 
 
@@ -28,6 +25,16 @@ $(document).ready(function(){
 	});
 
 
+	$(".patternRequiredMismatch")
+		.on("keyup",function(){
+		if(this.validity.patternMismatch || $(this).val() < 1){
+			setValidity(this);
+			setIncorrectInputs(this);
+		}else{
+			setCorrectInputs(this);
+		}
+	});
+
 	$(".patternMismatch")
 		.on("keyup",function(){
 		if(this.validity.patternMismatch){
@@ -37,6 +44,9 @@ $(document).ready(function(){
 			setCorrectInputs(this);
 		}
 	});
+
+	$(".dateMismatch")
+		.on("")
 
 });
 

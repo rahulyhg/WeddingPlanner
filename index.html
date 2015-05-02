@@ -85,17 +85,17 @@
 				<h3 class="text-center">Get a Quote</h3>
 				<form method="post" action="quote.php" name="quote" class="form-horizontal">
 					<div class="form-group">
-						<input type="text" class="form-control patternMismatch requiredMismatch" placeholder="First Name" id="first-name" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
+						<input type="text" class="form-control patternRequiredMismatch " placeholder="First Name" id="first-name" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
 					<div class="form-group">
-						<input type="text" class="form-control patternMismatch requiredMismatch" placeholder="Last Name" id="last-name" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
+						<input type="text" class="form-control patternRequiredMismatch" placeholder="Last Name" id="last-name" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
 					<div class="form-group">
-						<input type="email" class="form-control requiredMismatch typeMismatch" placeholder="Email" id="email" name="email" maxlength="254" required></div>
+						<input type="email" class="form-control typeMismatch" placeholder="Email" id="email" name="email" maxlength="254" required></div>
 					<div class="form-group">
 						<input type="text" class="form-control " placeholder="Address" id="address" name="address" maxlength="255"></div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Postcode" id="postcode" name="postcode" maxlength="8"></div>
 					<div class="form-group">
-						<input type="tel" class="form-control patterMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
+						<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
 					<div class="form-group">
 						<input type="date" class="form-control dateMismatch" placeholder="Wedding Date" id="wedding-date-in-the-future" name="wedding-date" min="2015-05-01" required></div>
 					<div class="form-group">
