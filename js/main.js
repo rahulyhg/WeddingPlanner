@@ -1,11 +1,9 @@
 $(document).ready(function(){
 
-	var firstName = document.getElementById("firstName");
-	var lastName = document.getElementById("lastName");
-	var weddingDate = document.getElementById("weddingDate");
-	var weddingLocation = document.getElementById("weddingLocation");
-	var telephone = document.getElementById("telephone");
 	
+	var today = new Date().toJSON().slice(0,10);
+	$("#wedding-date-in-the-future").attr("min",today);
+	var dateToday = new Date(today);
 
 	$("input")
 		.on("invalid",function(){
@@ -15,7 +13,7 @@ $(document).ready(function(){
 
 
 	$(".typeMismatch")
-		.on("keyup",function(){
+		.on("input",function(){
 		if(this.validity.typeMismatch || $(this).val() < 1){
 			setValidity(this);
 			setIncorrectInputs(this);
@@ -25,8 +23,8 @@ $(document).ready(function(){
 	});
 
 
-	$(".patternRequiredMismatch")
-		.on("keyup",function(){
+	$(".patternMismatch")
+		.on("input",function(){
 		if(this.validity.patternMismatch || $(this).val() < 1){
 			setValidity(this);
 			setIncorrectInputs(this);
@@ -35,18 +33,9 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".patternMismatch")
-		.on("keyup",function(){
-		if(this.validity.patternMismatch){
-			setValidity(this);
-			setIncorrectInputs(this);
-		}else{
-			setCorrectInputs(this);
-		}
-	});
 
 	$(".requiredMismatch")
-		.on("keyup",function(){
+		.on("input",function(){
 			if($(this).val() < 1){
 			setValidity(this);
 			setIncorrectInputs(this);
@@ -54,6 +43,18 @@ $(document).ready(function(){
 			setCorrectInputs(this);
 		}
 		});
+
+
+	$(".dateMismatch")
+		.on("input",function(){
+			givenDate = new Date($(this).val());
+			if(givenDate < dateToday){
+				setValidity(this);
+				setIncorrectInputs(this);
+			}else{
+				setCorrectInputs(this);
+			}
+	});
 
 });
 
