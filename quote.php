@@ -2,8 +2,7 @@
     require ('connect_oo.php'); #connect to database
     
     if($sqlError){
-        echo "<p>There as an error connecting to the database, please try again later.</p>"
-
+        echo "<p>There as an error connecting to the database, please try again later.</p>";
     }else{
 
 
@@ -11,8 +10,7 @@
     #values initialised
     $now = date("Y-m-d H:i:s");    
     $today = date("Y-m-d");
-    $firstName = $mysqli->
-real_escape_string($_POST['first-name']);
+    $firstName = $mysqli->real_escape_string($_POST['first-name']);
     $lastName = $mysqli->real_escape_string($_POST['last-name']);
     $email = $mysqli->real_escape_string($_POST['email']);
     $address = $mysqli->real_escape_string($_POST['address']);
@@ -36,7 +34,7 @@ real_escape_string($_POST['first-name']);
     }
 
     #validate last name
-    if(empty ($lastName || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$lastName))){
+    if(empty ($lastName) || strlen($lastName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$lastName)){
         echo "
     <li>Please enter a valid last name</li>
     ";
@@ -96,7 +94,7 @@ real_escape_string($_POST['first-name']);
 ";
 
     if($errors > 0){
-
+        echo "<p>Cannot process request, one or more errors exist!</p>";
     }else{
 
     #query
@@ -116,7 +114,7 @@ real_escape_string($_POST['first-name']);
         $stmt->close();
 
         }else{
-             printf("Errormessage: %s\n", $mysqli->error);
+             echo "<p>We were not able to process your request right now, please try again later";
         }
         $mysqli->close();
         }
