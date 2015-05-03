@@ -341,6 +341,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</div>
 	</div>
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<footer class="footer">
+      <div class="container">
+        <p>DISCLAIMER: Note that this is a fictitious website that was
+developed by a university student as part of a programming
+assignment. None of the content on this page is meant to be
+genuine nor should it be taken as such</p>
+      </div>
+    </footer>
+
 <script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
