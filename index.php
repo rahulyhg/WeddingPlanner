@@ -83,168 +83,224 @@
 
 			<?php
 				$today = date("Y-m-d");
-    			$firstName ="";
-    			$lastName = "";
-    			$email = "";
-    			$address = "";
-    			$postcode = "";
-    			$telephone = "";
-    			$weddingDate = "";
-    			$weddingLocation = "";
-    			$specialRequirements = "";
-    			$success = true;
+    			$today = date("Y-m-d");
+   				$firstName = $mysqli->
+			real_escape_string($_POST['first-name']);
+    			$lastName = $mysqli->real_escape_string($_POST['last-name']);
+    			$email = $mysqli->real_escape_string($_POST['email']);
+    			$address = $mysqli->real_escape_string($_POST['address']);
+    			$postcode = $mysqli->real_escape_string($_POST['postcode']);
+    			$telephone = $mysqli->real_escape_string($_POST['telephone-number']);
+    			$weddingDate = $mysqli->real_escape_string($_POST['wedding-date']);
+   				$weddingLocation = $mysqli->real_escape_string($_POST['wedding-location']);
+    			$specialRequirements = $mysqli->real_escape_string($_POST['special-requirements']);
+    			$success = false;
 			    $errors = 0;
-			    $errorText = "<div class='alert alert-danger' role='alert'>
-			<ul>
-				";
+			    $errorText = "
+			<div class='alert alert-danger' role='alert'>
+				<ul>
+					";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			    #validate first name
     if(empty ($firstName) || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$firstName)){
-        $errorText+="<li>Please enter a valid first name</li>";
+        $errorText+="
+					<li>Please enter a valid first name</li>
+					";
         $errors++;
     }
 
     #validate last name
     if(empty ($lastName) || strlen($lastName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$lastName)){
-         $errorText+="<li>Please enter a valid last name</li>
-				";
+         $errorText+="
+					<li>Please enter a valid last name</li>
+					";
         $errors++;
     }
 
     #validate email
     if(empty ($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254){
-        $errorText+="<li>Please enter a valid email</li>
-				";
+        $errorText+="
+					<li>Please enter a valid email</li>
+					";
         $errors++;
     }
 
     #validate address
     if(strlen($address) > 255){
-        $errorText+="<li>Please enter a valid address</li>
-				";   
+        $errorText+="
+					<li>Please enter a valid address</li>
+					";   
         $errors++;
     }
 
     #validate telephone
     if(!empty($telephone) && !preg_match("/^[0-9]{11}$/",$telephone)){
-        $errorText+="<li>Please enter a valid telephone number</li>
-				";
+        $errorText+="
+					<li>Please enter a valid telephone number</li>
+					";
         $errors++;
     }
     
     #validate postcode
     if(!empty($postcode) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$postcode)){
-        $errorText+="<li>Please enter a valid UK postcode</li>
-				";
+        $errorText+="
+					<li>Please enter a valid UK postcode</li>
+					";
         $errors++;   
     }
 
     #validate wedding date
     if(empty ($weddingDate) || !checkValidDate($weddingDate) || $weddingDate
-				< $today){
+					< $today){
         $errorText+="<li>Please enter a valid date in the future</li>
-				";
+					";
         $errors++;
     }
 
     #validate wedding location
     if(empty ($weddingLocation) || strlen($firstName) > 50){
-        $errorText+="<li>Please enter a valid wedding location</li>
-				";
+        $errorText+="
+					<li>Please enter a valid wedding location</li>
+					";
         $errors++;
+
+    }
+    	
     }
 
 			?>
-				<!-- Quote form -->
-				<div class="col-md-4">
-					<h3 class="text-center">Get a Quote</h3>
-					<?php 
+			<!-- Quote form -->
+			<div class="col-md-4">
+				<h3 class="text-center">Get a Quote</h3>
+				<?php 
 						if($success){
-							echo "<div class='alert alert-success' role='alert'><p>Your quote has been successfull processd and saved. We will contact you shortly</p></div>";
+							echo "<div class='alert alert-success' role='alert'>
+				<p>
+					Your quote has been successfull processd and saved. We will contact you shortly
+				</p>
+			</div>
+			";
 						}else if($errors > 0){
-
+							$errorText += "<li>Cannot process request - one or more errors exist. Please fix them and try again</li></ul></div>"
+							echo $errorText;
 						}
 
 					?>
-					<form method="post" action="quote.php" name="quote" class="form-horizontal">
-						<div class="form-group">
-							<input type="text" class="form-control patternMismatch" placeholder="First Name (required)" id="first-name" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
-						<div class="form-group">
-							<input type="text" class="form-control patternMismatch" placeholder="Last Name (required)" id="last-name" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
-						<div class="form-group">
-							<input type="email" class="form-control typeMismatch" placeholder="Email (required)" id="email" name="email" maxlength="254" required></div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Address" id="address" name="address" maxlength="255"></div>
-						<div class="form-group">
-							<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8"></div>
-						<div class="form-group">
-							<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
-						<div class="form-group">
-							<input type="date" class="form-control dateMismatch" placeholder="Wedding Date (required)" id="wedding-date-in-the-future" name="wedding-date" required></div>
-						<div class="form-group">
-							<input type="text" class="form-control requiredMismatch" placeholder="Wedding Location (required)" id="wedding-location" name="wedding-location" maxlength="50" required></div>
-						<div class="form-group">
-							<textarea type="text" class="form-control" placeholder="Special Requirements" id="special-requirements" name="special-requirements"></textarea>
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
-						</div>
-					</form>
+			<form method="post" action="quote.php" name="quote" class="form-horizontal">
+				<div class="form-group">
+					<input type="text" class="form-control patternMismatch" placeholder="First Name (required)" id="first-name" name="first-name" value="<?php  echo $firstName; ?>" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
+				<div class="form-group">
+					<input type="text" class="form-control patternMismatch" placeholder="Last Name (required)" id="last-name" name="last-name" value="<?php  echo $lastName; ?>" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
+				<div class="form-group">
+					<input type="email" class="form-control typeMismatch" placeholder="Email (required)" id="email" name="email" value="<?php  echo $email; ?>" maxlength="254" required></div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Address" id="address" name="address" value="<?php  echo $address1; ?>" maxlength="255"></div>
+				<div class="form-group">
+					<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" value="<?php  echo $postcode; ?>
+					" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8">
 				</div>
-			</div>
-			<h2 class="text-center">Services</h2>
-			<div class="row">
-				<div class="col-md-4">
-					<h3 class="text-center">Marquees</h3>
-					<img class="centre-image img-circle img-responsive" src="img/service1.jpg" alt="Wedding Service">
-					<br/>
-					<p class="text-justify">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
-				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
-				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
-				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
-				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
-				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
-				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
-				ut nulla egestas, in aliquam lorem ornare.
-					</p>
+				<div class="form-group">
+					<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" value="<?php  echo $telephone; ?>" maxlength="11" pattern="[0-9]{11}"></div>
+				<div class="form-group">
+					<input type="date" class="form-control dateMismatch" placeholder="Wedding Date (required)" id="wedding-date-in-the-future" name="wedding-date" value="<?php  echo $weddingDate; ?>" required></div>
+				<div class="form-group">
+					<input type="text" class="form-control requiredMismatch" placeholder="Wedding Location (required)" id="wedding-location" name="wedding-location" value="<?php  echo $weddingLocation; ?>" maxlength="50" required></div>
+				<div class="form-group">
+					<textarea type="text" class="form-control" placeholder="Special Requirements" id="special-requirements" name="special-requirements" value="<?php  echo $specialRequirements; ?>"></textarea>
 				</div>
-				<div class="col-md-4">
-					<h3 class="text-center">Catering</h3>
-					<img class="centre-image img-circle img-responsive" src="img/service2.jpg" alt="Wedding Service">
-					<br/>
-					<p class="text-justify">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
-				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
-				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
-				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
-				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
-				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
-				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
-				ut nulla egestas, in aliquam lorem ornare.
-					</p>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
 				</div>
-				<div class="col-md-4">
-					<h3 class="text-center">Decoration</h3>
-					<img class="centre-image img-circle img-responsive" src="img/service3.jpg" alt="Wedding Service">
-					<br/>
-					<p class="text-justify">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
-				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
-				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
-				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
-				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
-				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
-				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
-				ut nulla egestas, in aliquam lorem ornare.
-					</p>
-				</div>
-			</div>
-
+			</form>
 		</div>
+	</div>
+	<h2 class="text-center">Services</h2>
+	<div class="row">
+		<div class="col-md-4">
+			<h3 class="text-center">Marquees</h3>
+			<img class="centre-image img-circle img-responsive" src="img/service1.jpg" alt="Wedding Service">
+			<br/>
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h3 class="text-center">Catering</h3>
+			<img class="centre-image img-circle img-responsive" src="img/service2.jpg" alt="Wedding Service">
+			<br/>
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h3 class="text-center">Decoration</h3>
+			<img class="centre-image img-circle img-responsive" src="img/service3.jpg" alt="Wedding Service">
+			<br/>
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare.
+			</p>
+		</div>
+	</div>
+</div>
+<?php
+	 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	 	 #query
+   		if($stmt = $mysqli->prepare("INSERT INTO inquiries(submit_date, first_name, last_name, address, postcode, email, phone, wedding_date, wedding_location, special_req) VALUES (?,?,?,?,?,?,?,?,?,?);")){
+        	$stmt->bind_param('ssssssssss', $now, $firstName, $lastName, $address, $postcode, $email, $telephone, $weddingDate, $weddingLocation, $specialRequirements);
+        	$OK = $stmt->execute();
+        	#if query has been executed
+        	if ($OK){
+            	$success = true;
+        	}else{
+             $errors++;
+             $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
+			}
+        $stmt->close();
 
-		<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
-		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+        }else{
+        	 $errors++;
+             $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
+        }
+        $mysqli->close();
+        }
+    }
+}
+    #returns boolean depending on validity of date
+    function checkValidDate( $postedDate) {
+        if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$postedDate) ) {
+        list( $year , $month , $day ) = explode('-',$postedDate);
+        return( checkdate( $month , $day , $year ) );
+        } else {
+        return( false );
+        }
+
+	}	
+		?>
+<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </body>
-	</html>
+</html>
