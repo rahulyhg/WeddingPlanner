@@ -82,6 +82,7 @@
 			</div>
 
 			<?php
+
 				$errors = 0;
 			    $errorText = "
 			<div class='alert alert-danger' role='alert'>
@@ -91,10 +92,10 @@
 				require ('connect_oo.php'); #connect to database
     
     		if($sqlError){
-    			$erros++;
+    			$errors++;
         		$errorText+="<li>There as an error connecting to the database, please try again later.</li>";
-    		}else{
 
+    		}else{
 				$today = date("Y-m-d");
     			$firstName = "";
     			$lastName = "";
@@ -185,6 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
         return( false );
         }
+        }		
 			?>
 			<!-- Quote form -->
 			<div class="col-md-4">
@@ -220,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<div class="form-group">
 					<input type="email" class="form-control typeMismatch" placeholder="Email (required)" id="email" name="email" value="<?php  echo $email; ?>" maxlength="254" required></div>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Address" id="address" name="address" value="<?php  echo $address1; ?>" maxlength="255"></div>
+					<input type="text" class="form-control" placeholder="Address" id="address" name="address" value="<?php  echo $address; ?>" maxlength="255"></div>
 				<div class="form-group">
 					<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" value="<?php  echo $postcode; ?>
 					" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8">
@@ -291,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 <?php
 	 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	 	 if($errors == 0)
+	 	 if($errors == 0){
 	 	 	$firstName = $mysqli->real_escape_string($_POST['first-name']);
     		$lastName = $mysqli->real_escape_string($_POST['last-name']);
     		$email = $mysqli->real_escape_string($_POST['email']);
@@ -322,6 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mysqli->close();
     }
     }
+    
   	?>
 <script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
