@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			    #validate first name
     if(empty ($_POST['first-name']) || strlen($_POST['first-name']) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$_POST['first-name'])){
-        $errorText+="
+        $errorText.="
 					<li>Please enter a valid first name</li>
 					";
         $errors++;
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     #validate last name
     if(empty ($_POST['last-name']) || strlen($_POST['last-name']) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$_POST['last-name'])){
-         $errorText+="
+         $errorText.="
 					<li>Please enter a valid last name</li>
 					";
         $errors++;
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     #validate email
     if(empty ($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || strlen($_POST['email']) > 254){
-        $errorText+="
+        $errorText.="
 					<li>Please enter a valid email</li>
 					";
         $errors++;
@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     #validate address
     if(strlen($_POST['address']) > 255){
-        $errorText+="
+        $errorText.="
 					<li>Please enter a valid address</li>
 					";   
         $errors++;
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     #validate telephone
     if(!empty($_POST['telephone-number']) && !preg_match("/^[0-9]{11}$/",$_POST['telephone-number'])){
-        $errorText+="
+        $errorText.="
 					<li>Please enter a valid telephone number</li>
 					";
         $errors++;
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     #validate postcode
     if(!empty($_POST['postcode']) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$_POST['postcode'])){
-        $errorText+="
+        $errorText.="
 					<li>Please enter a valid UK postcode</li>
 					";
         $errors++;   
@@ -162,14 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     #validate wedding date
     if(empty ($_POST['wedding-date']) || !checkValidDate($_POST['wedding-date']) ||$_POST['wedding-date']
 					< $today){
-        $errorText+="<li>Please enter a valid date in the future</li>
+        $errorText.="<li>Please enter a valid date in the future</li>
 					";
         $errors++;
     }
 
     #validate wedding location
     if(empty ($_POST['wedding-location']) || strlen($_POST['wedding-location']) > 50){
-        $errorText+="
+        $errorText.="
 					<li>Please enter a valid wedding location</li>
 					";
         $errors++;
@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			</div>
 			";
 						}else if($errors > 0){
-							$errorText += "<li>Cannot process request - one or more errors exist. Please fix them and try again</li></ul></div>";
+							$errorText .= "<li>Cannot process request - one or more errors exist. Please fix them and try again</li></ul></div>";
 							echo $errorText;
 							$firstName = $_POST['first-name'];
     						$lastName = $_POST['last-name'];
@@ -313,14 +313,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             	$success = true;
         	}else{
              $errors++;
-             $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
+             $errorText.= "<li>We were not able to process your request right now, please try again later</li>";
              $success = false;
 			}
         $stmt->close();
 
         }else{
         	 $errors++;
-             $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
+             $errorText.= "<li>We were not able to process your request right now, please try again later</li>";
              $success = false;
         }
         $mysqli->close();
@@ -330,6 +330,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   	?>
 <script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
