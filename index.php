@@ -5,7 +5,12 @@
 	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"></head>
 	<link rel="stylesheet" href="css/main.css"></head>
 <body>
-	<h1 class="text-center">Wedding Planner Service</h1>
+	<nav class="navbar navbar-default navbar-static-top ">
+  <div class="container">
+	<div class="navbar-header"><a class="navbar-brand" href="index.php">Wedding Planner Service</a></div>
+  </div>
+</nav>
+	
 	<div class="container">
 		<!-- Carousel of images -->
 		<div id="weddingPicsCarousel" class="carousel slide" data-ride="carousel">
