@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Wedding Planner Southampton</title>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"></head>
+	<link rel="stylesheet" href="css/main.css"></head>
+<body>
+	<h1 class="text-center">Wedding Planner Service</h1>
+	<div class="container">
+		<!-- Carousel of images -->
+		<div id="weddingPicsCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#weddingPicsCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#weddingPicsCarousel" data-slide-to="1"></li>
+				<li data-target="#weddingPicsCarousel" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img  class="carousel-image" src="img/weddingImage1.jpg" alt="Generic Wedding Image 1">
+					<div class="carousel-caption">Planning Weddings is tough!</div>
+				</div>
+				<div class="item">
+					<img class="carousel-image" src="img/weddingImage2.jpg" alt="Generic Wedding Image 2">
+					<div class="carousel-caption">...</div>
+				</div>
+				<div class="item">
+					<img class="carousel-image" src="img/weddingImage3.jpg" alt="Generic Wedding Image 3">
+					<div class="carousel-caption">...</div>
+				</div>
+			</div>
+
+			<!-- Controls -->
+			<a class="left carousel-control" href="#weddingPicsCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#weddingPicsCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<h3 class="text-center">About Us</h3>
+				<div class="text-justify">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+					et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+					augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+					lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+					facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+					Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+					ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+					ut nulla egestas, in aliquam lorem ornare. Vestibulum et tortor tristique justo ultrices interdum at
+					in ipsum. Praesent gravida ipsum felis, ornare cursus tortor mattis sit amet. Etiam quis augue vel 
+					lacus maximus blandit nec eget risus.
+					</p>
+					<p>
+						In non orci at arcu iaculis fermentum. Suspendisse ultricies elit est, quis condimentum augue sodales
+					ac. Nam cursus sem metus, sit amet scelerisque libero tempor nec. Donec bibendum ut purus quis dignissim.
+				  	Nullam diam nibh, scelerisque et turpis a, posuere bibendum ante. Cras malesuada ligula erat, ut vestibulum
+				   	velit pharetra ac. Mauris imperdiet dui et eros cursus malesuada. Praesent faucibus diam nisi, ac rhoncus 
+				   	diam hendrerit ut. Maecenas sit amet tristique elit. Praesent in lacus eu magna venenatis pulvinar vel eu 
+				   	justo. Vivamus feugiat sapien vitae nisi lacinia, vulputate pellentesque ipsum porta. Duis porttitor mauris 
+				   	vitae tempor commodo. Integer posuere, magna quis rutrum egestas, enim velit gravida quam, eu consectetur 
+				   	tellus risus vitae augue. Maecenas tellus mi, tempor ac ligula non, tempus malesuada mauris.
+					</p>
+					<p>
+						Mauris at nibh in dolor mattis gravida. Proin tincidunt finibus nisi eu eleifend. Fusce convallis egestas 
+					ex, non placerat augue scelerisque a. Phasellus nec tortor tincidunt nulla ornare semper ac et augue. Proin 
+					id elementum eros, sed bibendum ipsum. Vivamus ac diam ut urna gravida pellentesque. Cras pretium ac magna 
+					in scelerisque. Curabitur sed maximus metus. Nunc ac nisl nibh. Praesent molestie ultricies mi vitae fermentum. 
+					Duis in maximus erat. Maecenas ante risus, egestas eu lorem quis, ornare volutpat tortor. Curabitur mollis 
+					consequat ex quis feugiat. Aliquam sed mattis ligula.
+					</p>
+					<p></p>
+				</div>
+			</div>
+				
+			<?php
+				$today = date("Y-m-d");
+    			$firstName ="";
+    			$lastName = "";
+    			$email = "";
+    			$address = "";
+    			$postcode = "";
+    			$telephone = "";
+    			$weddingDate = "";
+    			$weddingLocation = "";
+    			$specialRequirements = "";
+
+			    $errors = 0;
+			    $errorText = "";
+
+			?>
+	
+
+			<!-- Quote form -->
+			<div class="col-md-4">
+				<h3 class="text-center">Get a Quote</h3>
+				<form method="post" action="quote.php" name="quote" class="form-horizontal">
+					<div class="form-group">
+						<input type="text" class="form-control patternMismatch" placeholder="First Name (required)" id="first-name" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
+					<div class="form-group">
+						<input type="text" class="form-control patternMismatch" placeholder="Last Name (required)" id="last-name" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
+					<div class="form-group">
+						<input type="email" class="form-control typeMismatch" placeholder="Email (required)" id="email" name="email" maxlength="254" required></div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Address" id="address" name="address" maxlength="255"></div>
+					<div class="form-group">
+						<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8"></div>
+					<div class="form-group">
+						<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
+					<div class="form-group">
+						<input type="date" class="form-control dateMismatch" placeholder="Wedding Date (required)" id="wedding-date-in-the-future" name="wedding-date" required></div>
+					<div class="form-group">
+						<input type="text" class="form-control requiredMismatch" placeholder="Wedding Location (required)" id="wedding-location" name="wedding-location" maxlength="50" required></div>
+					<div class="form-group">
+						<textarea type="text" class="form-control" placeholder="Special Requirements" id="special-requirements" name="special-requirements"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
+					</div>
+				</form>
+			</div>
+		</div>
+			<h2 class="text-center">Services</h2>
+	<div class="row">
+		<div class="col-md-4">
+			<h3 class="text-center">Marquees</h3>
+			<img class="centre-image img-circle img-responsive" src="img/service1.jpg" alt="Wedding Service">
+			<br/>
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare. 
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h3 class="text-center">Catering</h3>
+			<img class="centre-image img-circle img-responsive" src="img/service2.jpg" alt="Wedding Service">
+			<br/>
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h3 class="text-center">Decoration</h3>
+			<img class="centre-image img-circle img-responsive" src="img/service3.jpg" alt="Wedding Service">
+			<br/>
+			<p class="text-justify">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare. 
+			</p>
+		</div>
+	</div>
+
+	</div>
+
+
+	<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
