@@ -106,7 +106,7 @@
     			$weddingDate = "";
    				$weddingLocation = "";
     			$specialRequirements = "";
-    			$success = false;
+    			$success="";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -214,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						}
 
 					?>
-			<form method="post" action="quote.php" name="quote" class="form-horizontal">
+			<form method="post" action="index.php" name="quote" class="form-horizontal">
 				<div class="form-group">
 					<input type="text" class="form-control patternMismatch" placeholder="First Name (required)" id="first-name" name="first-name" value="<?php  echo $firstName; ?>" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
 				<div class="form-group">
@@ -224,8 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Address" id="address" name="address" value="<?php  echo $address; ?>" maxlength="255"></div>
 				<div class="form-group">
-					<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" value="<?php  echo $postcode; ?>
-					" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8">
+					<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" value="<?php  echo $postcode; ?>" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8">
 				</div>
 				<div class="form-group">
 					<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" value="<?php  echo $telephone; ?>" maxlength="11" pattern="[0-9]{11}"></div>
@@ -294,6 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php
 	 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	 	 if($errors == 0){
+	 	 	$now = date("Y-m-d H:i:s");    
 	 	 	$firstName = $mysqli->real_escape_string($_POST['first-name']);
     		$lastName = $mysqli->real_escape_string($_POST['last-name']);
     		$email = $mysqli->real_escape_string($_POST['email']);
@@ -314,12 +314,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         	}else{
              $errors++;
              $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
+             $success = false;
 			}
         $stmt->close();
 
         }else{
         	 $errors++;
              $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
+             $success = false;
         }
         $mysqli->close();
     }
