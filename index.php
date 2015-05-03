@@ -82,29 +82,36 @@
 			</div>
 
 			<?php
-				$today = date("Y-m-d");
-    			$today = date("Y-m-d");
-   				$firstName = $mysqli->
-			real_escape_string($_POST['first-name']);
-    			$lastName = $mysqli->real_escape_string($_POST['last-name']);
-    			$email = $mysqli->real_escape_string($_POST['email']);
-    			$address = $mysqli->real_escape_string($_POST['address']);
-    			$postcode = $mysqli->real_escape_string($_POST['postcode']);
-    			$telephone = $mysqli->real_escape_string($_POST['telephone-number']);
-    			$weddingDate = $mysqli->real_escape_string($_POST['wedding-date']);
-   				$weddingLocation = $mysqli->real_escape_string($_POST['wedding-location']);
-    			$specialRequirements = $mysqli->real_escape_string($_POST['special-requirements']);
-    			$success = false;
-			    $errors = 0;
+				$errors = 0;
 			    $errorText = "
 			<div class='alert alert-danger' role='alert'>
 				<ul>
 					";
 
+				require ('connect_oo.php'); #connect to database
+    
+    		if($sqlError){
+    			$erros++;
+        		$errorText+="<li>There as an error connecting to the database, please try again later.</li>";
+    		}else{
+
+				$today = date("Y-m-d");
+    			$firstName = "";
+    			$lastName = "";
+    			$email = "";
+    			$address = "";
+    			$postcode = "";
+    			$telephone = "";
+    			$weddingDate = "";
+   				$weddingLocation = "";
+    			$specialRequirements = "";
+    			$success = false;
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			    #validate first name
-    if(empty ($firstName) || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$firstName)){
+    if(empty ($_POST['first-name']) || strlen($_POST['first-name']) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$_POST['first-name'])){
         $errorText+="
 					<li>Please enter a valid first name</li>
 					";
@@ -112,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #validate last name
-    if(empty ($lastName) || strlen($lastName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$lastName)){
+    if(empty ($_POST['last-name']) || strlen($_POST['last-name']) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$_POST['last-name'])){
          $errorText+="
 					<li>Please enter a valid last name</li>
 					";
@@ -120,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #validate email
-    if(empty ($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254){
+    if(empty ($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || strlen($_POST['email']) > 254){
         $errorText+="
 					<li>Please enter a valid email</li>
 					";
@@ -128,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #validate address
-    if(strlen($address) > 255){
+    if(strlen($_POST['address']) > 255){
         $errorText+="
 					<li>Please enter a valid address</li>
 					";   
@@ -136,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #validate telephone
-    if(!empty($telephone) && !preg_match("/^[0-9]{11}$/",$telephone)){
+    if(!empty($_POST['telephone-number']) && !preg_match("/^[0-9]{11}$/",$_POST['telephone-number'])){
         $errorText+="
 					<li>Please enter a valid telephone number</li>
 					";
@@ -144,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     #validate postcode
-    if(!empty($postcode) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$postcode)){
+    if(!empty($_POST['postcode']) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$_POST['postcode'])){
         $errorText+="
 					<li>Please enter a valid UK postcode</li>
 					";
@@ -152,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #validate wedding date
-    if(empty ($weddingDate) || !checkValidDate($weddingDate) || $weddingDate
+    if(empty ($_POST['wedding-date']) || !checkValidDate($_POST['wedding-date']) ||$_POST['wedding-date']
 					< $today){
         $errorText+="<li>Please enter a valid date in the future</li>
 					";
@@ -160,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #validate wedding location
-    if(empty ($weddingLocation) || strlen($firstName) > 50){
+    if(empty ($_POST['wedding-location']) || strlen($_POST['wedding-location']) > 50){
         $errorText+="
 					<li>Please enter a valid wedding location</li>
 					";
@@ -169,7 +176,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     	
     }
-
+	}
+    #returns boolean depending on validity of date
+    function checkValidDate( $postedDate) {
+        if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$postedDate) ) {
+        list( $year , $month , $day ) = explode('-',$postedDate);
+        return( checkdate( $month , $day , $year ) );
+        } else {
+        return( false );
+        }
 			?>
 			<!-- Quote form -->
 			<div class="col-md-4">
@@ -183,8 +198,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			</div>
 			";
 						}else if($errors > 0){
-							$errorText += "<li>Cannot process request - one or more errors exist. Please fix them and try again</li></ul></div>"
+							$errorText += "<li>Cannot process request - one or more errors exist. Please fix them and try again</li></ul></div>";
 							echo $errorText;
+							$firstName = $_POST['first-name'];
+    						$lastName = $_POST['last-name'];
+    						$email = $_POST['email'];
+    						$address = $_POST['address'];
+    						$postcode = $_POST['postcode'];
+    						$telephone = $_POST['telephone-number'];
+    						$weddingDate = $_POST['wedding-date'];
+    						$weddingLocation = $_POST['wedding-location'];
+    						$specialRequirements = $_POST['special-requirements'];
 						}
 
 					?>
@@ -267,6 +291,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 <?php
 	 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	 	 if($errors == 0)
+	 	 	$firstName = $mysqli->real_escape_string($_POST['first-name']);
+    		$lastName = $mysqli->real_escape_string($_POST['last-name']);
+    		$email = $mysqli->real_escape_string($_POST['email']);
+    		$address = $mysqli->real_escape_string($_POST['address']);
+    		$postcode = $mysqli->real_escape_string($_POST['postcode']);
+    		$telephone = $mysqli->real_escape_string($_POST['telephone-number']);
+    		$weddingDate = $mysqli->real_escape_string($_POST['wedding-date']);
+    		$weddingLocation = $mysqli->real_escape_string($_POST['wedding-location']);
+    		$specialRequirements = $mysqli->real_escape_string($_POST['special-requirements']);
+
 	 	 #query
    		if($stmt = $mysqli->prepare("INSERT INTO inquiries(submit_date, first_name, last_name, address, postcode, email, phone, wedding_date, wedding_location, special_req) VALUES (?,?,?,?,?,?,?,?,?,?);")){
         	$stmt->bind_param('ssssssssss', $now, $firstName, $lastName, $address, $postcode, $email, $telephone, $weddingDate, $weddingLocation, $specialRequirements);
@@ -285,20 +320,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              $errorText+= "<li>We were not able to process your request right now, please try again later</li>";
         }
         $mysqli->close();
-        }
     }
-}
-    #returns boolean depending on validity of date
-    function checkValidDate( $postedDate) {
-        if ( preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$postedDate) ) {
-        list( $year , $month , $day ) = explode('-',$postedDate);
-        return( checkdate( $month , $day , $year ) );
-        } else {
-        return( false );
-        }
-
-	}	
-		?>
+    }
+  	?>
 <script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
