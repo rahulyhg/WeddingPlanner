@@ -80,7 +80,7 @@
 					<p></p>
 				</div>
 			</div>
-				
+
 			<?php
 				$today = date("Y-m-d");
     			$firstName ="";
@@ -92,65 +92,114 @@
     			$weddingDate = "";
     			$weddingLocation = "";
     			$specialRequirements = "";
-
+    			$success = true;
 			    $errors = 0;
-			    $errorText = "";
+			    $errorText = "<div class='alert alert-danger' role='alert'>
+			<ul>
+				";
+
+			    #validate first name
+    if(empty ($firstName) || strlen($firstName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$firstName)){
+        $errorText+="<li>Please enter a valid first name</li>";
+        $errors++;
+    }
+
+    #validate last name
+    if(empty ($lastName) || strlen($lastName) > 35 || !preg_match("/^[a-zA-Z ,.'-]+$/",$lastName)){
+         $errorText+="<li>Please enter a valid last name</li>
+				";
+        $errors++;
+    }
+
+    #validate email
+    if(empty ($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254){
+        $errorText+="<li>Please enter a valid email</li>
+				";
+        $errors++;
+    }
+
+    #validate address
+    if(strlen($address) > 255){
+        $errorText+="<li>Please enter a valid address</li>
+				";   
+        $errors++;
+    }
+
+    #validate telephone
+    if(!empty($telephone) && !preg_match("/^[0-9]{11}$/",$telephone)){
+        $errorText+="<li>Please enter a valid telephone number</li>
+				";
+        $errors++;
+    }
+    
+    #validate postcode
+    if(!empty($postcode) && !preg_match("/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/",$postcode)){
+        $errorText+="<li>Please enter a valid UK postcode</li>
+				";
+        $errors++;   
+    }
+
+    #validate wedding date
+    if(empty ($weddingDate) || !checkValidDate($weddingDate) || $weddingDate
+				< $today){
+        $errorText+="<li>Please enter a valid date in the future</li>
+				";
+        $errors++;
+    }
+
+    #validate wedding location
+    if(empty ($weddingLocation) || strlen($firstName) > 50){
+        $errorText+="<li>Please enter a valid wedding location</li>
+				";
+        $errors++;
+    }
 
 			?>
-	
+				<!-- Quote form -->
+				<div class="col-md-4">
+					<h3 class="text-center">Get a Quote</h3>
+					<?php 
+						if($success){
+							echo "<div class='alert alert-success' role='alert'><p>Your quote has been successfull processd and saved. We will contact you shortly</p></div>";
+						}else if($errors > 0){
 
-			<!-- Quote form -->
-			<div class="col-md-4">
-				<h3 class="text-center">Get a Quote</h3>
-				<form method="post" action="quote.php" name="quote" class="form-horizontal">
-					<div class="form-group">
-						<input type="text" class="form-control patternMismatch" placeholder="First Name (required)" id="first-name" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
-					<div class="form-group">
-						<input type="text" class="form-control patternMismatch" placeholder="Last Name (required)" id="last-name" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
-					<div class="form-group">
-						<input type="email" class="form-control typeMismatch" placeholder="Email (required)" id="email" name="email" maxlength="254" required></div>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Address" id="address" name="address" maxlength="255"></div>
-					<div class="form-group">
-						<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8"></div>
-					<div class="form-group">
-						<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
-					<div class="form-group">
-						<input type="date" class="form-control dateMismatch" placeholder="Wedding Date (required)" id="wedding-date-in-the-future" name="wedding-date" required></div>
-					<div class="form-group">
-						<input type="text" class="form-control requiredMismatch" placeholder="Wedding Location (required)" id="wedding-location" name="wedding-location" maxlength="50" required></div>
-					<div class="form-group">
-						<textarea type="text" class="form-control" placeholder="Special Requirements" id="special-requirements" name="special-requirements"></textarea>
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
-					</div>
-				</form>
+						}
+
+					?>
+					<form method="post" action="quote.php" name="quote" class="form-horizontal">
+						<div class="form-group">
+							<input type="text" class="form-control patternMismatch" placeholder="First Name (required)" id="first-name" name="first-name" maxlength="35" pattern="[a-zA-Z ,.'-]+" required></div>
+						<div class="form-group">
+							<input type="text" class="form-control patternMismatch" placeholder="Last Name (required)" id="last-name" name="last-name" maxlength="35"  pattern="[a-zA-Z ,.'-]+" required></div>
+						<div class="form-group">
+							<input type="email" class="form-control typeMismatch" placeholder="Email (required)" id="email" name="email" maxlength="254" required></div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Address" id="address" name="address" maxlength="255"></div>
+						<div class="form-group">
+							<input type="text" class="form-control patternMismatch" placeholder="Postcode" id="UK-postcode" name="postcode" pattern="([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)" maxlength="8"></div>
+						<div class="form-group">
+							<input type="tel" class="form-control patternMismatch" placeholder="Telephone" id="telephone-number" name="telephone-number" maxlength="11" pattern="[0-9]{11}"></div>
+						<div class="form-group">
+							<input type="date" class="form-control dateMismatch" placeholder="Wedding Date (required)" id="wedding-date-in-the-future" name="wedding-date" required></div>
+						<div class="form-group">
+							<input type="text" class="form-control requiredMismatch" placeholder="Wedding Location (required)" id="wedding-location" name="wedding-location" maxlength="50" required></div>
+						<div class="form-group">
+							<textarea type="text" class="form-control" placeholder="Special Requirements" id="special-requirements" name="special-requirements"></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-default btn-block">Submit enquiry</button>
+						</div>
+					</form>
+				</div>
 			</div>
-		</div>
 			<h2 class="text-center">Services</h2>
-	<div class="row">
-		<div class="col-md-4">
-			<h3 class="text-center">Marquees</h3>
-			<img class="centre-image img-circle img-responsive" src="img/service1.jpg" alt="Wedding Service">
-			<br/>
-			<p class="text-justify">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
-				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
-				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
-				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
-				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
-				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
-				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
-				ut nulla egestas, in aliquam lorem ornare. 
-			</p>
-		</div>
-		<div class="col-md-4">
-			<h3 class="text-center">Catering</h3>
-			<img class="centre-image img-circle img-responsive" src="img/service2.jpg" alt="Wedding Service">
-			<br/>
-			<p class="text-justify">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+			<div class="row">
+				<div class="col-md-4">
+					<h3 class="text-center">Marquees</h3>
+					<img class="centre-image img-circle img-responsive" src="img/service1.jpg" alt="Wedding Service">
+					<br/>
+					<p class="text-justify">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
 				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
 				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
 				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
@@ -158,30 +207,44 @@
 				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
 				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
 				ut nulla egestas, in aliquam lorem ornare.
-			</p>
-		</div>
-		<div class="col-md-4">
-			<h3 class="text-center">Decoration</h3>
-			<img class="centre-image img-circle img-responsive" src="img/service3.jpg" alt="Wedding Service">
-			<br/>
-			<p class="text-justify">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h3 class="text-center">Catering</h3>
+					<img class="centre-image img-circle img-responsive" src="img/service2.jpg" alt="Wedding Service">
+					<br/>
+					<p class="text-justify">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
 				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
 				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
 				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
 				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
 				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
 				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
-				ut nulla egestas, in aliquam lorem ornare. 
-			</p>
+				ut nulla egestas, in aliquam lorem ornare.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h3 class="text-center">Decoration</h3>
+					<img class="centre-image img-circle img-responsive" src="img/service3.jpg" alt="Wedding Service">
+					<br/>
+					<p class="text-justify">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam nunc vel ante consectetur,
+				et tristique dolor semper. Pellentesque vitae libero sed dolor sodales maximus. Maecenas semper posuere
+				augue, sit amet sodales libero lacinia ac. Nunc tincidunt mi nec auctor facilisis. Curabitur eget lacus
+				lorem. Nullam eget facilisis metus, in convallis justo. Phasellus a purus id lacus molestie iaculis 
+				facilisis sit amet justo. Pellentesque a vestibulum leo, a egestas sapien. Aliquam id aliquam diam. 
+				Vestibulum id mauris consectetur, imperdiet turpis sed, interdum neque. Suspendisse potenti. Vestibulum
+				ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum suscipit odio
+				ut nulla egestas, in aliquam lorem ornare.
+					</p>
+				</div>
+			</div>
+
 		</div>
-	</div>
 
-	</div>
-
-
-	<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 </body>
-</html>
+	</html>
