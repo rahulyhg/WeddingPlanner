@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 				
 				<p>
-					Your quote has been successfull processd and saved. We will contact you shortly
+					Your quote has been successfully processed and saved. We will contact you shortly
 				</p>
 			</div>
 			";

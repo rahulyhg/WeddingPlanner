@@ -1,5 +1,5 @@
 <?php 
-$mysqli = new mysqli("lamp.ecs.soton.ac.uk","MANG6180_student","tintin1830","mgmt_webapp_msc"); 
+$mysqli = new mysqli("linuxproj.ecs.soton.ac.uk","mak1g11","incorrect","db_mak1g11"); 
 $sqlError=false;
 if (mysqli_connect_errno()) { 
     $sqlError=true;
